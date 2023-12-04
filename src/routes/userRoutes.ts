@@ -5,7 +5,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 // User CRUD
-
+ 
   // Create user
   router.post('/', async(req, res)=>{
     const { email, name, username } = req.body;
