@@ -1,13 +1,19 @@
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
+
 const router = Router();
 const prisma = new PrismaClient();
+
+const JWT_SECRET = "SUPER SECRET"; //
+
 
 // Tweet CRUD
 
   // Create tweet
   router.post('/', async (req, res)=>{
-    const { content, image, userId } = req.body;
+    const { content, image } = req.body;
+    // @ts-ignore
+    const user = req.user;
 
 
     try{
@@ -15,7 +21,7 @@ const prisma = new PrismaClient();
         data: {
          content,
          image,
-         userId // todo manage based on the auth user
+         userId: user.id, 
         },
      });
  
